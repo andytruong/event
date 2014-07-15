@@ -19,7 +19,7 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
             <exclude>
-                <directory>./src/*Trait.php</directory>
+                <file>./src/*Trait.php</file>
             </exclude>
         </whitelist>
     </filter>
