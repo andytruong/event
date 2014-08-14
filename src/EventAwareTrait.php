@@ -1,7 +1,8 @@
 <?php
 
-namespace AndyTruong\Traits;
+namespace AndyTruong\Event;
 
+use ArrayAccess;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -82,7 +83,7 @@ trait EventAwareTrait
      */
     public function trigger($event_name, $target, $params)
     {
-        $event = new \AndyTruong\Common\Event($event_name, $target, $params);
+        $event = new Event($event_name, $target, $params);
         return $this->getDispatcher()->dispatch($event_name, $event);
     }
 
