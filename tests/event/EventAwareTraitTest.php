@@ -9,9 +9,9 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
- * @group event
+ * @group event-trait
  */
-class EventAwareTraitTest
+class EventAwareTraitTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testSetter()
@@ -42,7 +42,7 @@ class EventAwareTraitTest
 
     /**
      * @expectedException RuntimeException
-     * @expectedExceptionMessage Event is executed. Class: AndyTruong\Common\Fixtures\Traits\EventAwareClass. Params: param_1, param_2
+     * @expectedExceptionMessage Event is executed. Class: AndyTruong\Event\Fixtures\Traits\EventAwareClass. Params: param_1, param_2
      */
     public function testDispatchCustomEvent()
     {
@@ -62,7 +62,7 @@ class EventAwareTraitTest
 
     /**
      * @expectedException RuntimeException
-     * @expectedExceptionMessage Event is executed. Class: AndyTruong\Common\Fixtures\Traits\EventAwareClass. Params: param_1, param_2
+     * @expectedExceptionMessage Event is executed. Class: AndyTruong\Event\Fixtures\Traits\EventAwareClass. Params: param_1, param_2
      */
     public function testTriggerShortcut()
     {
