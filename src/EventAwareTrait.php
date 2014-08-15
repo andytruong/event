@@ -79,11 +79,30 @@ trait EventAwareTrait
      * @param string $event_name
      * @param string|object $target
      * @param array|ArrayAccess $params
+     * @return Event
      */
-    public function trigger($event_name, $target, $params)
+    public function trigger($event_name, $target = null, $params = [])
     {
         $event = new Event($event_name, $target, $params);
         return $this->getDispatcher()->dispatch($event_name, $event);
+    }
+
+    /**
+     * Collect results from listeners.
+     *
+     * @param string $event_name
+     * @param string|object $target
+     * @param array $params
+     * @param array $validators
+     * @return array
+     */
+    public function collectResults($event_name, $target = null, $params = [], array $validators = [])
+    {
+        $event = new Event($event_name, $target, $params);
+        foreach ($validators as $validator) {
+            $event->addResultValidator($validator);
+        }
+        return $this->getDispatcher()->dispatch($event_name, $event)->getResults();
     }
 
 }

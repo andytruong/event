@@ -79,4 +79,44 @@ class EventAwareTraitTest extends \PHPUnit_Framework_TestCase
         $obj->trigger('my_event', $obj, array('param_1', 'param_2'));
     }
 
+    /**
+     * @group ondev
+     * @dataProvider sourceCollectResults
+     */
+    public function testCollectResults($add_result, $exception = null, $msg = null)
+    {
+        if (null !== $exception) {
+            $this->setExpectedException($exception, $msg);
+        }
+
+        $obj = new EventAwareClass();
+        $obj
+            ->getDispatcher()
+            ->addListener('my_collection_event', function(CustomEvent $event) use ($add_result) {
+                /* @var $event \CustomEvent  */
+                $event->addResultValidator(function($input) {
+                    if (!is_numeric($input)) {
+                        throw new \Exception('Only number is allowed.');
+                    }
+
+                    if ($input % 2 !== 0) {
+                        throw new \Exception('Only even number is allowed.');
+                    }
+                });
+
+                $event->addResult($add_result);
+            });
+
+        $obj->trigger('my_collection_event', $obj, ['param_1', 'param_2']);
+    }
+
+    public function sourceCollectResults()
+    {
+        return [
+            ['string', 'RuntimeException', 'Only number is allowed.'],
+            [1, 'Exception', 'Only even number is allowed.'],
+            [2],
+        ];
+    }
+
 }
