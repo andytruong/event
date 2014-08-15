@@ -13,15 +13,17 @@ use Zend\EventManager\Exception\InvalidArgumentException;
 class Event extends BaseEvent
 {
 
-    /**
-     * @var string|object The event target
-     */
+    /** @var string|object The event target */
     protected $target;
 
-    /**
-     * @var array|ArrayAccess|object The event parameters.
-     */
+    /** @var array|ArrayAccess|object The event parameters. */
     protected $params;
+
+    /** @var array Collect results */
+    protected $results = [];
+
+    /** @var array */
+    protected $result_validators = [];
 
     /**
      * Constructor
@@ -98,6 +100,41 @@ class Event extends BaseEvent
 
         $this->params = $params;
         return $this;
+    }
+
+    /**
+     * Add result validator.
+     *
+     * @param callable $validator
+     */
+    public function addResultValidator($validator)
+    {
+        $this->result_validators[] = $validator;
+    }
+
+    /**
+     * Collect result.
+     *
+     * @param mixed $result
+     * @throws Exception
+     */
+    public function addResult($result)
+    {
+        try {
+            foreach ($this->result_validators as $validator) {
+                call_user_func($validator, $result);
+            }
+        }
+        catch (\Exception $e) {
+            throw new \RuntimeException('Invalid value: ' . $e->getMessage());
+        }
+
+        $this->results[] = $result;
+    }
+
+    public function getResults()
+    {
+        return $this->results;
     }
 
 }

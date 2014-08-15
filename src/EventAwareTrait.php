@@ -79,6 +79,7 @@ trait EventAwareTrait
      * @param string $event_name
      * @param string|object $target
      * @param array|ArrayAccess $params
+     * @return Event
      */
     public function trigger($event_name, $target, $params)
     {
