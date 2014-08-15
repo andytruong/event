@@ -107,7 +107,7 @@ class Event extends BaseEvent
      *
      * @param callable $validator
      */
-    public function addResultValidator($validator)
+    public function addResultValidator(callable $validator)
     {
         $this->result_validators[] = $validator;
     }
