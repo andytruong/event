@@ -33,3 +33,24 @@ $myobj->getDispatcher()->addListener('my.event.before', function(\AndyTruong\Com
 });
 $myobj->myEventAwareMethod();
 ```
+
+## Result collecting
+
+In real projects, we often collect results from external code. It can be done
+easily like this:
+
+```php
+<?php
+$myobj = new MyClass();
+$myobj->getDispatcher()->addListener('my.results.collecting.event', function(\AndyTruong\Common\Event $e) {
+    $e->addResult("Hello there!");
+});
+$myobj->collectResults('my.results.collecting.event'); // ["Hello there!"]
+
+// to validate input
+$myobj->collectResults('my.results.collecting.event', null, null, [
+    function($input) {
+        if (!is_string($input)) { throw new \Exception('Input must be string!'); }
+    }
+]); // ["Hello there!"]
+```
