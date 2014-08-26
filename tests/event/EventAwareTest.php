@@ -52,7 +52,8 @@ class EventAwareTest extends PHPUnit_Framework_TestCase
     {
         $obj = $this->getEventAwareObject();
         $obj->getDispatcher()->addListener('full', function (Event $e) {
-            throw new RuntimeException('Listener is trigged: ' . implode(', ', $e->getParams()));
+            /* @var $e \AndyTruong\Event\Event */
+            throw new RuntimeException('Listener is trigged: ' . implode(', ', $e->getArguments()));
         });
         $obj->full('baz', 'bat');
     }

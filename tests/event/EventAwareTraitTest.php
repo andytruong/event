@@ -48,15 +48,14 @@ class EventAwareTraitTest extends \PHPUnit_Framework_TestCase
     {
         $obj = new EventAwareClass();
         $obj->getDispatcher()->addListener('my_event', function(CustomEvent $event) {
-            $event->getTarget();
             $msg = sprintf(
                 'Event is executed. Class: %s. Params: %s'
-                , get_class($event->getTarget())
-                , implode(', ', $event->getParams())
+                , get_class($event->getSubject())
+                , implode(', ', $event->getArguments())
             );
             throw new RuntimeException($msg);
         });
-        $event = new CustomEvent('event_aware_class', $obj, array('param_1', 'param_2'));
+        $event = new CustomEvent($obj, array('param_1', 'param_2'));
         $obj->dispatch('my_event', $event);
     }
 
@@ -68,11 +67,11 @@ class EventAwareTraitTest extends \PHPUnit_Framework_TestCase
     {
         $obj = new EventAwareClass();
         $obj->getDispatcher()->addListener('my_event', function(CustomEvent $event) {
-            $event->getTarget();
+            $event->getSubject();
             $msg = sprintf(
                 'Event is executed. Class: %s. Params: %s'
-                , get_class($event->getTarget())
-                , implode(', ', $event->getParams())
+                , get_class($event->getSubject())
+                , implode(', ', $event->getArguments())
             );
             throw new RuntimeException($msg);
         });

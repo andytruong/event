@@ -83,7 +83,7 @@ trait EventAwareTrait
      */
     public function trigger($event_name, $target = null, $params = [])
     {
-        $event = new Event($event_name, $target, $params);
+        $event = new Event($target, $params);
         return $this->getDispatcher()->dispatch($event_name, $event);
     }
 
@@ -98,7 +98,7 @@ trait EventAwareTrait
      */
     public function collectResults($event_name, $target = null, $params = [], array $validators = [])
     {
-        $event = new Event($event_name, $target, $params);
+        $event = new Event($target, $params);
         foreach ($validators as $validator) {
             $event->addResultValidator($validator);
         }
