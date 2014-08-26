@@ -1,4 +1,4 @@
-Common
+Event
 ======
 
 [![Build Status](https://api.travis-ci.org/andytruong/event.svg?branch=v0.1)](https://travis-ci.org/andytruong/event) [![Latest Stable Version](https://poser.pugx.org/andytruong/event/v/stable.png)](https://packagist.org/packages/andytruong/event) [![Dependency Status](https://www.versioneye.com/php/andytruong:event/2.3.0/badge.svg)](https://www.versioneye.com/php/andytruong:event/2.3.0) [![License](https://poser.pugx.org/andytruong/event/license.png)](https://packagist.org/packages/andytruong/event)
