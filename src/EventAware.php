@@ -91,7 +91,7 @@ class EventAware
      */
     public function trigger($event_name, $target, $params = array())
     {
-        $event = new Event($event_name, $target, $params);
+        $event = new Event($target, $params);
         return $this->getDispatcher()->dispatch($event_name, $event);
     }
 
