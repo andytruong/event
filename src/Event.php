@@ -9,10 +9,10 @@ class Event extends GenericEvent
 {
 
     /** @var array Collect results */
-    protected $results = [];
+    private $results = [];
 
     /** @var array */
-    protected $result_validators = [];
+    private $resultValidators = [];
 
     /**
      * Add result validator.
@@ -21,7 +21,7 @@ class Event extends GenericEvent
      */
     public function addResultValidator(callable $validator)
     {
-        $this->result_validators[] = $validator;
+        $this->resultValidators[] = $validator;
     }
 
     /**
@@ -33,7 +33,7 @@ class Event extends GenericEvent
     public function addResult($result)
     {
         try {
-            foreach ($this->result_validators as $validator) {
+            foreach ($this->resultValidators as $validator) {
                 call_user_func($validator, $result);
             }
         }
