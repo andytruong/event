@@ -5,6 +5,7 @@ namespace AndyTruong\Event;
 use ArrayAccess;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\Event as BaseEvent;
 
 /**
  * This Trait is only available when we use this library with symfony/event-dispatcher:~2.5.0.
@@ -52,7 +53,7 @@ trait EventAwareTrait
 
     /**
      * Check available of dispatcher.
-     * 
+     *
      * @return boolean
      */
     public function hasDispatcher()
@@ -74,45 +75,49 @@ trait EventAwareTrait
     /**
      * Shortcut to dispatch an event.
      *
-     * @param string $event_name
-     * @param Event $event
-     * @return Event
+     * @param string $eventName
+     * @param BaseEvent $event
+     * @return BaseEvent
      */
-    public function dispatch($event_name, Event $event = null)
+    public function dispatch($eventName, BaseEvent $event = null)
     {
-        return $this->getDispatcher()->dispatch($event_name, $event);
+        return $this->getDispatcher()->dispatch($eventName, $event);
     }
 
     /**
      * Dispatch an event with extra params.
      *
-     * @param string $event_name
-     * @param string|object $target
+     * @param string $eventName
+     * @param string|object $subject
      * @param array|ArrayAccess $params
      * @return Event
      */
-    public function trigger($event_name, $target = null, $params = [])
+    public function trigger($eventName, &$subject, $params = [])
     {
-        $event = new Event($target, $params);
-        return $this->getDispatcher()->dispatch($event_name, $event);
+        $event = new Event($subject, $params);
+        $return = $this->getDispatcher()->dispatch($eventName, $event);
+        if (!is_object($subject)) {
+            $subject = $event->getSubject();
+        }
+        return $return;
     }
 
     /**
      * Collect results from listeners.
      *
-     * @param string $event_name
-     * @param string|object $target
+     * @param string $eventName
+     * @param string|object $subject
      * @param array $params
      * @param array $validators
      * @return array
      */
-    public function collectResults($event_name, $target = null, $params = [], array $validators = [])
+    public function collectResults($eventName, $subject, $params = [], array $validators = [])
     {
-        $event = new Event($target, $params);
+        $event = new Event($subject, $params);
         foreach ($validators as $validator) {
             $event->addResultValidator($validator);
         }
-        return $this->getDispatcher()->dispatch($event_name, $event)->getResults();
+        return $this->getDispatcher()->dispatch($eventName, $event)->getResults();
     }
 
 }

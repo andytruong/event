@@ -4,6 +4,7 @@ namespace AndyTruong\Event\TestCases\Traits;
 
 use AndyTruong\Event\Event as CustomEvent;
 use AndyTruong\Event\Fixtures\Traits\EventAwareClass;
+use PHPUnit_Framework_TestCase;
 use RuntimeException;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -11,7 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 /**
  * @group event-trait
  */
-class EventAwareTraitTest extends \PHPUnit_Framework_TestCase
+class EventAwareTraitTest extends PHPUnit_Framework_TestCase
 {
 
     public function testSetter()
