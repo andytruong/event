@@ -51,6 +51,16 @@ trait EventAwareTrait
     }
 
     /**
+     * Check available of dispatcher.
+     * 
+     * @return boolean
+     */
+    public function hasDispatcher()
+    {
+        return null !== $this->dispatcher;
+    }
+
+    /**
      * Generate default dispatcher, override this if your class would like to
      * provide an other default dispatcher.
      *

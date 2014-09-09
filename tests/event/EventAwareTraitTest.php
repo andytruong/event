@@ -17,7 +17,9 @@ class EventAwareTraitTest extends \PHPUnit_Framework_TestCase
     public function testSetter()
     {
         $obj = new EventAwareClass();
+        $this->assertFalse($obj->hasDispatcher());
         $obj->setDispatcher($dispatcher = new EventDispatcher());
+        $this->assertTrue($obj->hasDispatcher());
         $this->assertSame($dispatcher, $obj->getDispatcher());
     }
 
