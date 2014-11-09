@@ -1,4 +1,4 @@
-Event [![Build Status](https://api.travis-ci.org/andytruong/event.svg?branch=v0.1)](https://travis-ci.org/andytruong/event) [![Latest Stable Version](https://poser.pugx.org/andytruong/event/v/stable.png)](https://packagist.org/packages/andytruong/event) [![Dependency Status](https://www.versioneye.com/php/andytruong:event/0.1.4/badge.svg)](https://www.versioneye.com/php/andytruong:event/0.1.4) [![License](https://poser.pugx.org/andytruong/event/license.png)](https://packagist.org/packages/andytruong/event)
+Event [![Build Status](https://api.travis-ci.org/atphp/event.svg?branch=v0.1)](https://travis-ci.org/atphp/event) [![Latest Stable Version](https://poser.pugx.org/andytruong/event/v/stable.png)](https://packagist.org/packages/andytruong/event) [![Dependency Status](https://www.versioneye.com/php/andytruong:event/0.1.4/badge.svg)](https://www.versioneye.com/php/andytruong:event/0.1.4) [![License](https://poser.pugx.org/andytruong/event/license.png)](https://packagist.org/packages/andytruong/event)
 ======
 
 Wrapper for Symfony Event Dispatcher to provide more functionality.
