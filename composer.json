@@ -1,9 +1,9 @@
 {
-    "name": "andytruong/event",
+    "name": "atphp/event",
     "type": "library",
     "description": "Wrapper for Symfony EventDispatcher component to provide more functionality.",
     "keywords": ["api", "wrapper", "event-dispatcher"],
-    "homepage": "https://github.com/andytruong/event",
+    "homepage": "https://github.com/atphp/event",
     "license": "MIT",
     "authors": [
       {
